@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% if title %}
+        <title>Flask App - {{title}}</title>
+    {% else %}
+        <title>Friends - </title>
+    {% endif%}
+</head>
+
+<body>
+    {% block content %}{% endblock %}
+</body>
+
+</html>
