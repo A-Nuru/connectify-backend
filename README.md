@@ -1,9 +1,9 @@
 # flaskapp
 ## Running the app
 - Run `virtualenv myenv` to create a virtual env
-- Run `myenv/Scripts\activate` to activate the virtual env
+- Run `myenv/Scripts/activate` to activate the virtual env
 - Run `pip install flask, flask_cors, flask_sqlalchemy, flask_wtf, psycopg2` to install the dependencies
-
+- Run `python3 app.py` to  styart the app. The app starts at port 5000
 - (pipenv shell)
 
 ## Generating secret tokens
