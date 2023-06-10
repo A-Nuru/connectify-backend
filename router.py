@@ -1,21 +1,35 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, jsonify, request, redirect
+from flask_cors import CORS
 from controllers import UserController
-from database import initialize_database
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route('/')
+@app.route("/")
 def index():
+    return jsonify({"message": "Welcome to the Connectify backend!"})
+
+@app.route('/users')
+def get_users():
     users = UserController.get_all_users()
-    return render_template('index.html', users=users)
+    user_list=[]
+    for user in users:
+        user_list.append(format_users(user))
+    return jsonify(user_list)
+
+def format_users(user):
+    return {
+        "id": user[0],
+        "username": user[1],
+        "password": user[2]
+    }
 
 @app.route('/register', methods=['POST'])
 def register():
-    username = request.form.get('username')
-    password = request.form.get('password')
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
     UserController.register_user(username, password)
-    return redirect('/')
+    return jsonify({"username":username, "password":password})
 
-if __name__ == '__main__':
-    initialize_database()
-    app.run(debug=True)
+

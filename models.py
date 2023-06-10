@@ -32,3 +32,5 @@ class User:
         rows = c.fetchall()
         conn.close()
         return rows
+
+
